@@ -5,10 +5,10 @@ from typing import Optional
 
 
 class IdPay:
-    CREATE_TRANSACTION_API = "https://api.idpay.ir/v1.1/payment" 
-    TRANSACTION_VERIFICATION_API = "https://api.idpay.ir/v1.1/payment/verify"
-    GET_TRANSACTION_STATUS_API = "https://api.idpay.ir/v1.1/payment/inquiry"
-    GET_ALL_TRANSACTION_API = "https://api.idpay.ir/v1.1/payment/transactions"
+    __CREATE_TRANSACTION_API = "https://api.idpay.ir/v1.1/payment" 
+    __TRANSACTION_VERIFICATION_API = "https://api.idpay.ir/v1.1/payment/verify"
+    __GET_TRANSACTION_STATUS_API = "https://api.idpay.ir/v1.1/payment/inquiry"
+    __GET_ALL_TRANSACTION_API = "https://api.idpay.ir/v1.1/payment/transactions"
     
     def __init__(self, api_key:str, sandbox:bool):
         self.request = requests.session()
@@ -42,7 +42,7 @@ class IdPay:
             'desc':desc,
         }
         
-        response = self.request.post(self.CREATE_TRANSACTION_API,
+        response = self.request.post(self.__CREATE_TRANSACTION_API,
                                  json=data
                                  )
         return response.json()
@@ -54,7 +54,7 @@ class IdPay:
             'order_id':order_id
         }
         
-        response = self.request.post(self.TRANSACTION_VERIFICATION_API,
+        response = self.request.post(self.__TRANSACTION_VERIFICATION_API,
                                  json=data
                                  )
         return response.json()
@@ -65,7 +65,7 @@ class IdPay:
             'order_id':order_id
         }
         
-        response = self.request.post(self.GET_TRANSACTION_STATUS_API,
+        response = self.request.post(self.__GET_TRANSACTION_STATUS_API,
                                  json=data
                                  )
         return response.json()
@@ -76,13 +76,10 @@ class IdPay:
             'page_size':page_size
         }
         
-        response = self.request.post(self.GET_TRANSACTION_STATUS_API,
+        response = self.request.post(self.__GET_TRANSACTION_STATUS_API,
                                  json=data
                                  )
         return response.json()
     
     
-    
-# print(IdPay('087fdd57-5d41-4ecd-b39a-53b9634d0579',True).create_transaction('dknawjdbawd',10000,callback='localhost.com/callback/'))
-# print(IdPay('087fdd57-5d41-4ecd-b39a-53b9634d0579',True).verify_payment('900bfeefdf62758e9af220c6851bd00f', 'dknawjdbawd'))
 
